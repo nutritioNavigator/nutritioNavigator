@@ -1,23 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import firebase from "./firebase.js"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Nutrition Navigator</h1>
+      <footer>
+        <p>Created by <a href="#">Luis</a>, <a href="#">Natalie</a>, <a href="#">Sam</a>, and <a href="#">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>
+        <p>Powered by <a href="http://www.nutritionix.com/api">Nutritionix API</a></p>
+      </footer>
     </div>
   );
 }
