@@ -10,6 +10,16 @@ const FoodItem = (props) => {
     )
 }
 
+const Servings = (props) => {
+    return (
+        <>
+            <p>Serving quantity: {props.qty}</p>
+            <p>Serving weight: {props.weight} g</p>
+            <p>Serving unit: {props.unit}</p>
+        </>
+    )
+}
+
 const Nutrients = (props) => {
     const fullNutrients = props.fullNutrients
 
@@ -23,7 +33,7 @@ const Nutrients = (props) => {
             <h3>Nutritional Info:</h3>
             {
             selectedNutrients.map(nutr => {
-                return <p >{nutr.value} {nutrInfo[nutr.attr_id]}</p>
+                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
             })
             }
         </div>
@@ -32,6 +42,7 @@ const Nutrients = (props) => {
 
 export {
     FoodItem,
+    Servings,
     Nutrients,
 };
 

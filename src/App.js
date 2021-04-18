@@ -11,9 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { useEffect, useState } from 'react';
-import { FoodItem, Nutrients } from "./FoodItem.js"
+import { FoodItem, Servings, Nutrients } from "./FoodItem.js"
 import Favourites from "./Favourites.js"
 import Compare from "./Compare.js"
+import FoodPage from './FoodPage.js';
 
 
 function App() {
@@ -69,7 +70,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="header">
-          <h1>NutritioNav</h1>
+          <Link to="/" className="logo">NutritioNav</Link>
           <nav>
             <Link to="/favourites">Favourites</Link>
             <Link to="/compare">Compare</Link>
@@ -93,12 +94,19 @@ function App() {
         {
           food.map( (oneFood, i) => {
             return (
+              <>
+              <Link to={`/${oneFood.food_name}`}>
               <div key={i} className="foodItem">
                 <FoodItem name={oneFood.food_name}
                           imgUrl={oneFood.photo.thumb}
                 />
 
-                <Nutrients fullNutrients={oneFood.full_nutrients} />
+                <Servings qty={oneFood.serving_qty}
+                          unit={oneFood.serving_unit}
+                          weight={oneFood.serving_weight_grams}
+                                />
+
+                {/* <Nutrients fullNutrients={oneFood.full_nutrients} /> */}
 
                 <FontAwesomeIcon icon={faHeart} 
                                 onClick={ !fave ?
@@ -110,6 +118,19 @@ function App() {
                 />
                 <FontAwesomeIcon icon={faExchangeAlt} />
               </div>
+              </Link>
+              <Route
+              exact path={`/${oneFood.food_name}`}
+              render={ () => (
+                <FoodPage
+                title={oneFood.food_name}
+                imgUrl={oneFood.photo.thumb}
+                fullNutrients={oneFood.full_nutrients}
+                ></FoodPage>
+              )}
+              >
+              </Route>
+              </>
             )
           })
         }
