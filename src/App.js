@@ -1,31 +1,52 @@
 import './App.css';
-import firebase from "./firebase.js"
+// import firebase from "./firebase.js"
+import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const attrInfo = [
-  {303: "Iron"},
-  {304: "Magnesium"},
-  {309: "Zinc"},
-  {318: "Vitamin A, IU"},
-  {323: "Vitamin E"},
-  {328: "Vitamin D"},
-  {401: "Vitamin C"},
-  {415: "Vitamin B6"}
-]
+import { FoodItem, Nutrients } from "./FoodItem.js"
+import Favourites from "./Favourites.js"
+import Compare from "./Compare.js"
 
 
 function App() {
+  const [food, setFood] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [search, setSearch] = useState("banana");
+  const [fave, setFave] = useState(false);
 
-  const [food, setFood] = useState([])
+  // Sets user input state as user types in search bar
+  const handleChange = (e) => {
+    setUserInput(e.target.value)
+  }
 
-  const foodName = [];
-  // Make an API call 
+  // Waits for user to finish typing, then set state to be used in API search
+  const handleClick = (e) => {
+    e.preventDefault();
+    setSearch(userInput)
+  }
+
+  const addToFavourites = () => {
+    setFave(true);
+    console.log('added to faves');
+  }
+
+  const removeFromFavourites = () => {
+    setFave(false);
+    console.log('removed');
+  }
+
+  // Make an API call
   useEffect( () => {
     const apiId = "338f3631";
     const apiKey = "22d6ce3bf3f9c8d2a561f57b78ff91d8";
-    const apiUserId = "0";
     axios({
       url: "https://trackapi.nutritionix.com/v2/search/instant",
       method: "GET",
@@ -35,38 +56,73 @@ function App() {
         "x-app-key": apiKey
       },
       params: {
-        query: "banana",
+        query: search,
         detailed: true,
       }
     }).then( (res) => {
-      
-      let data = res.data.common
-            // console.log(foodName);
-      console.log(data);
+      console.log(res);
       setFood(res.data.common);
     })
-  },[]);
+  },[search]);
 
   return (
-    <div className="App">
-      <h1>Nutrition Navigator</h1>
-      {
-        food.map( (oneFood) => {
-          return (
-            <>
-              <h2>{oneFood.food_name}</h2>
-              <img src={oneFood.photo.thumb} />
-              
-              <p></p>
-            </>
-          )
-        })
-      }
-      <footer>
-        <p>Created by <a href="#">Luis</a>, <a href="#">Natalie</a>, <a href="#">Sam</a>, and <a href="#">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>
-        <p>Powered by <a href="http://www.nutritionix.com/api">Nutritionix API</a></p>
-      </footer>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="header">
+          <h1>NutritioNav</h1>
+          <nav>
+            <Link to="/favourites">Favourites</Link>
+            <Link to="/compare">Compare</Link>
+          </nav>
+        </header>
+
+        <form action="submit">
+          <input 
+            type="text"
+            onChange={handleChange}
+            placeholder="Type search here"
+          />
+          <button onClick={handleClick}>Search</button>
+        </form>
+
+        <div className="resultsContainer">
+
+          <Route exact path="/favourites" component={ Favourites } />
+          <Route exact path="/compare" component={ Compare } />
+
+        {
+          food.map( (oneFood, i) => {
+            return (
+              <div key={i} className="foodItem">
+                <FoodItem name={oneFood.food_name}
+                          imgUrl={oneFood.photo.thumb}
+                />
+
+                <Nutrients fullNutrients={oneFood.full_nutrients} />
+
+                <FontAwesomeIcon icon={faHeart} 
+                                onClick={ !fave ?
+                                          addToFavourites
+                                          : removeFromFavourites}
+                                className={ fave ?
+                                            "faved"
+                                            : ""}
+                />
+                <FontAwesomeIcon icon={faExchangeAlt} />
+              </div>
+            )
+          })
+        }
+        </div>
+
+        
+
+        <footer>
+          <p>Created by <a href="https://github.com/carlosbarrero">Luis</a>, <a href="https://github.com/midnightorca">Natalie</a>, <a href="https://github.com/randomock">Sam</a>, and <a href="https://github.com/">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>
+          <p>Powered by <a href="http://www.nutritionix.com/api">Nutritionix API</a></p>
+        </footer>
+      </div>
+    </Router>
   );
 }
 
