@@ -25,20 +25,35 @@ const Nutrients = (props) => {
 
     // create array of keys of the wanted nutrients, and parse int
     const wantedNutrientIds = Object.keys(nutrInfo).map(n => +n);
+    const wantedVMIds = Object.keys(vitsAndMins).map(n => +n);
     // create array of only objects we want from API array
     const selectedNutrients = fullNutrients.filter(nutrient => wantedNutrientIds.includes(nutrient.attr_id));
+    const selectedVitAndMins = fullNutrients.filter(nutrient => wantedVMIds.includes(nutrient.attr_id));
 
     return (
         <div className="foodNutrients">
             <h3>Nutritional Info:</h3>
-            {
-            selectedNutrients.map(nutr => {
-                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
-            })
-            }
+            <div>
+                <h4>Macronutrients</h4>
+                {
+                selectedNutrients.map(nutr => {
+                    return <p >{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+                })
+                }
+            </div>
+            <div>
+                <h4>Micronutrients</h4>
+                {
+                selectedVitAndMins.map(nutr => {
+                    return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p> 
+                })
+                }
+            </div>
         </div>
     )
 }
+
+
 
 export {
     FoodItem,

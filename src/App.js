@@ -7,64 +7,15 @@ import {
   Link
 } from "react-router-dom"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
-
 import { useEffect, useState } from 'react';
 import { FoodItem, Servings, Nutrients } from "./FoodItem.js"
 import Favourites from "./Favourites.js"
 import Compare from "./Compare.js"
 import FoodPage from './FoodPage.js';
+import Home from "./Home.js"
 
 
 function App() {
-  const [food, setFood] = useState([]);
-  const [userInput, setUserInput] = useState("");
-  const [search, setSearch] = useState("banana");
-  const [fave, setFave] = useState(false);
-
-  // Sets user input state as user types in search bar
-  const handleChange = (e) => {
-    setUserInput(e.target.value)
-  }
-
-  // Waits for user to finish typing, then set state to be used in API search
-  const handleClick = (e) => {
-    e.preventDefault();
-    setSearch(userInput)
-  }
-
-  const addToFavourites = () => {
-    setFave(true);
-    console.log('added to faves');
-  }
-
-  const removeFromFavourites = () => {
-    setFave(false);
-    console.log('removed');
-  }
-
-  // Make an API call
-  useEffect( () => {
-    const apiId = "338f3631";
-    const apiKey = "22d6ce3bf3f9c8d2a561f57b78ff91d8";
-    axios({
-      url: "https://trackapi.nutritionix.com/v2/search/instant",
-      method: "GET",
-      dataResponse: "json",
-      headers: {
-        "x-app-id": apiId,
-        "x-app-key": apiKey
-      },
-      params: {
-        query: search,
-        detailed: true,
-      }
-    }).then( (res) => {
-      console.log(res);
-      setFood(res.data.common);
-    })
-  },[search]);
 
   return (
     <Router>
@@ -77,66 +28,13 @@ function App() {
           </nav>
         </header>
 
-        <form action="submit">
-          <input 
-            type="text"
-            onChange={handleChange}
-            placeholder="Type search here"
-          />
-          <button onClick={handleClick}>Search</button>
-        </form>
-
-        <div className="resultsContainer">
-
+        <main>
+          <Route path="/" component={ Home } />
+          <Route exact path="/:food_name" component={ FoodPage } />
           <Route exact path="/favourites" component={ Favourites } />
           <Route exact path="/compare" component={ Compare } />
+        </main>
 
-        {
-          food.map( (oneFood, i) => {
-            return (
-              <>
-              <Link to={`/${oneFood.food_name}`}>
-              <div key={i} className="foodItem">
-                <FoodItem name={oneFood.food_name}
-                          imgUrl={oneFood.photo.thumb}
-                />
-
-                <Servings qty={oneFood.serving_qty}
-                          unit={oneFood.serving_unit}
-                          weight={oneFood.serving_weight_grams}
-                                />
-
-                {/* <Nutrients fullNutrients={oneFood.full_nutrients} /> */}
-
-                <FontAwesomeIcon icon={faHeart} 
-                                onClick={ !fave ?
-                                          addToFavourites
-                                          : removeFromFavourites}
-                                className={ fave ?
-                                            "faved"
-                                            : ""}
-                />
-                <FontAwesomeIcon icon={faExchangeAlt} />
-              </div>
-              </Link>
-              <Route
-              exact path={`/${oneFood.food_name}`}
-              render={ () => (
-                <FoodPage
-                title={oneFood.food_name}
-                imgUrl={oneFood.photo.thumb}
-                fullNutrients={oneFood.full_nutrients}
-                ></FoodPage>
-              )}
-              >
-              </Route>
-              </>
-            )
-          })
-        }
-        </div>
-
-        
 
         <footer>
           <p>Created by <a href="https://github.com/carlosbarrero">Luis</a>, <a href="https://github.com/midnightorca">Natalie</a>, <a href="https://github.com/randomock">Sam</a>, and <a href="https://github.com/">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>
