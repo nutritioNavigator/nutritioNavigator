@@ -5,14 +5,14 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from "react-router-dom"
+} from "react-router-dom";
 
 import { useEffect, useState } from 'react';
 import { FoodItem, Servings, Nutrients } from "./FoodItem.js"
 import Favourites from "./Favourites.js"
 // import Compare from "./Compare.js"
 import FoodPage from './FoodPage.js';
-import Home from "./Home.js"
+import Home from "./Home.js";
 
 
 function App() {

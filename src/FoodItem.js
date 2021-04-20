@@ -36,7 +36,7 @@ const Nutrients = (props) => {
                 <h4>Macronutrients</h4>
                 {
                 selectedNutrients.map(nutr => {
-                    return <p >{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+                    return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
                 })
                 }
             </div>

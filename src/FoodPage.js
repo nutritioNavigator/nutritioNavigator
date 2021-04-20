@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Nutrients } from './FoodItem.js';
 import { useState } from "react";
 import firebase from "./firebase.js";
