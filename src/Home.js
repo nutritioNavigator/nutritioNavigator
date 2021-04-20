@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import {Link, Route} from "react-router-dom";
 import {FoodItem, Servings} from "./FoodItem.js";
 import FoodPage from "./FoodPage.js"
+import {nutrInfo, vitsAndMins} from "./constants.js"
 
-const Home = () => {
+const Home = (props) => {
     const [food, setFood] = useState([]);
     const [userInput, setUserInput] = useState("");
     const [search, setSearch] = useState("banana");
@@ -20,6 +21,10 @@ const Home = () => {
         e.preventDefault();
         setSearch(userInput)
     }
+
+    // create array of keys of the wanted nutrients, and parse int
+    const wantedNutrientIds = Object.keys(nutrInfo).map(n => +n);
+    const wantedVMIds = Object.keys(vitsAndMins).map(n => +n);
 
     // Make an API call
     useEffect( () => {
@@ -38,8 +43,28 @@ const Home = () => {
             detailed: true,
         }
         }).then( (res) => {
-        console.log(res.data.common);
-        setFood(res.data.common);
+            console.log(res.data.common);
+
+            const data = res.data.common;
+
+            const newState= [];
+            for (let i = 0; i < data.length; i++) {
+                const fullNutrients = data[i].full_nutrients;
+
+                newState.push({
+                    name: data[i].food_name,
+                    imgUrl: data[i].photo.thumb,
+                    servingInfo: {
+                        servingQty: data[i].serving_qty,
+                        servingWeight: data[i].serving_weight_grams,
+                        servingUnit: data[i].servingUnit,
+                    },
+                    macroNutrients: fullNutrients.filter(nutrient => wantedNutrientIds.includes(nutrient.attr_id)),
+                    microNutrients: fullNutrients.filter(nutrient => wantedVMIds.includes(nutrient.attr_id))
+                })
+            }
+
+            setFood(newState);
         })
     },[search]);
 
@@ -61,16 +86,16 @@ const Home = () => {
             food.map( (oneFood, i) => {
                 return (
                 <>
-                <Link to={`/${oneFood.food_name}`}>
+                <Link to={`/${oneFood.name}`} onClick={() => props.displayPage(oneFood)}>
                     <div key={i} className="foodItem">
-                        <FoodItem name={oneFood.food_name}
-                                imgUrl={oneFood.photo.thumb}
+                        <FoodItem name={oneFood.name}
+                                imgUrl={oneFood.imgUrl}
                         />
-
+            {/* 
                         <Servings qty={oneFood.serving_qty}
                                 unit={oneFood.serving_unit}
                                 weight={oneFood.serving_weight_grams}
-                        />
+                        /> */}
                     </div>
                 </Link>
                 {/* <Route

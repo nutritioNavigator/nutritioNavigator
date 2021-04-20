@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Nutrients } from './FoodItem.js';
 import { useState } from "react";
-import firebase from "./firebase.js"
+import firebase from "./firebase.js";
+import {nutrInfo, vitsAndMins} from "./constants.js";
 
 const FoodPage = (props) => {
+  const {info} = props;
   console.log(props);
   
   const [fave, setFave] = useState(false);
@@ -31,9 +33,11 @@ const FoodPage = (props) => {
     // toRemove.remove()
   }
   
+  
+
   return (
     <div>
-      <h2>{props.title}</h2>
+      <h2>{info.name}</h2>
       <FontAwesomeIcon icon={faHeart} 
                        onClick={ !fave ?
                                  addToFavourites
@@ -43,17 +47,22 @@ const FoodPage = (props) => {
                                    : ""}
       />
       <FontAwesomeIcon icon={faExchangeAlt} />
-      <img src={props.imgUrl} alt={props.title}/>
+      <img src={info.imgUrl} alt={info.name}/>
       <div>
         {/* Nutrition data goes here */}
+        <h3>Nutritional Information</h3>
         <div>
           {/* Macros */}
-          {/* <Nutrients
-          fullNutrients={props.fullNutrients}
-          /> */}
+          <h4>Macronutrients</h4>
+          {info.macroNutrients.map(nutr => {
+            return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+          })}
         </div>
         <div>
-          {/* Micronutrients (vits and mins) */}
+          <h4>Micronutrients</h4>
+          {info.microNutrients.map(nutr => {
+            return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p> 
+          })}
         </div>
       </div>
     </div>

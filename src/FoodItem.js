@@ -1,6 +1,5 @@
 import { nutrInfo, vitsAndMins } from "./constants.js"
 
-
 const FoodItem = (props) => {
     return (
         <>
@@ -21,7 +20,7 @@ const Servings = (props) => {
 }
 
 const Nutrients = (props) => {
-    const fullNutrients = props.fullNutrients
+    const fullNutrients = props.fullNutrients;
 
     // create array of keys of the wanted nutrients, and parse int
     const wantedNutrientIds = Object.keys(nutrInfo).map(n => +n);
