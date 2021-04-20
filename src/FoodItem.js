@@ -3,8 +3,10 @@ import { nutrInfo, vitsAndMins } from "./constants.js"
 const FoodItem = (props) => {
     return (
         <>
-            <h2>{props.name.toUpperCase()}</h2>
-            <img src={props.imgUrl} alt="" />
+            <h2>{props.name}</h2>
+            <div className="imgContainer">
+                <img src={props.imgUrl} alt="" />
+            </div>
         </>
     )
 }
@@ -36,7 +38,7 @@ const Nutrients = (props) => {
                 <h4>Macronutrients</h4>
                 {
                 selectedNutrients.map(nutr => {
-                    return <p >{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+                    return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
                 })
                 }
             </div>
