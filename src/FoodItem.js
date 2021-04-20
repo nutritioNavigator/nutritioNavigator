@@ -3,8 +3,10 @@ import { nutrInfo, vitsAndMins } from "./constants.js"
 const FoodItem = (props) => {
     return (
         <>
-            <h2>{props.name.toUpperCase()}</h2>
-            <img src={props.imgUrl} alt="" />
+            <h2>{props.name}</h2>
+            <div className="imgContainer">
+                <img src={props.imgUrl} alt="" />
+            </div>
         </>
     )
 }

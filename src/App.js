@@ -29,12 +29,16 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="header">
-          <Link to="/" className="logo">NutritioNav</Link>
-          <nav>
-            <Link to="/favourites">Favourites</Link>
-            <Link to="/compare">Compare</Link>
-          </nav>
+        <header>
+          <div className="wrapper">
+            <div className="headerContainer">
+              <Link to="/" className="logo">NutritioNav</Link>
+              <nav>
+                <Link to="/favourites">Favourites</Link>
+                <Link to="/compare">Compare</Link>
+              </nav>
+            </div>
+          </div>
         </header>
 
         <main>

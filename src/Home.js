@@ -57,7 +57,7 @@ const Home = (props) => {
                     servingInfo: {
                         servingQty: data[i].serving_qty,
                         servingWeight: data[i].serving_weight_grams,
-                        servingUnit: data[i].servingUnit,
+                        servingUnit: data[i].serving_unit,
                     },
                     macroNutrients: fullNutrients.filter(nutrient => wantedNutrientIds.includes(nutrient.attr_id)),
                     microNutrients: fullNutrients.filter(nutrient => wantedVMIds.includes(nutrient.attr_id))
@@ -72,7 +72,12 @@ const Home = (props) => {
     return (
         <>
             <form action="submit">
-                <input 
+                <label
+                htmlFor="searchbar"
+                className="visuallyHidden"
+                >Search food here</label>
+                <input
+                    id="searchbar"
                     type="text"
                     onChange={handleChange}
                     placeholder="Type search here"
@@ -80,39 +85,40 @@ const Home = (props) => {
                 <button onClick={handleClick}>Search</button>
             </form>
 
-            <div className="resultsContainer">
-
-            {
-            food.map( (oneFood, i) => {
-                return (
-                <>
-                <Link to={`/${oneFood.name}`} onClick={() => props.displayPage(oneFood)}>
-                    <div key={i} className="foodItem">
-                        <FoodItem name={oneFood.name}
-                                imgUrl={oneFood.imgUrl}
-                        />
-            {/* 
-                        <Servings qty={oneFood.serving_qty}
-                                unit={oneFood.serving_unit}
-                                weight={oneFood.serving_weight_grams}
-                        /> */}
-                    </div>
-                </Link>
-                {/* <Route
-                    exact path={`/${oneFood.food_name}`}
-                    render={ () => (
-                        <FoodPage
-                            title={oneFood.food_name}
-                            imgUrl={oneFood.photo.thumb}
-                            fullNutrients={oneFood.full_nutrients}
-                        ></FoodPage>
-                    )}
-                >
-                </Route> */}
-                </>
-                )
-            }) 
-            }
+            <div className="wrapper">
+                <div className="resultsContainer">
+                    {
+                    food.map( (oneFood, i) => {
+                        return (
+                        <>
+                        <Link to={`/${oneFood.name}`} onClick={() => props.displayPage(oneFood)}>
+                            <div key={i} className="foodItem">
+                                <FoodItem name={oneFood.name}
+                                        imgUrl={oneFood.imgUrl}
+                                />
+                    {/* 
+                                <Servings qty={oneFood.serving_qty}
+                                        unit={oneFood.serving_unit}
+                                        weight={oneFood.serving_weight_grams}
+                                /> */}
+                            </div>
+                        </Link>
+                        {/* <Route
+                            exact path={`/${oneFood.food_name}`}
+                            render={ () => (
+                                <FoodPage
+                                    title={oneFood.food_name}
+                                    imgUrl={oneFood.photo.thumb}
+                                    fullNutrients={oneFood.full_nutrients}
+                                ></FoodPage>
+                            )}
+                        >
+                        </Route> */}
+                        </>
+                        )
+                    }) 
+                    }
+                </div>
             </div>
         </>
     )
