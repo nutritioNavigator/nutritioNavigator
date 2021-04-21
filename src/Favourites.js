@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import firebase from "./firebase.js"
+import { Link } from 'react-router-dom';
 
 const Favourites = (props) => {
     const {faves} = props;
@@ -8,14 +9,18 @@ const Favourites = (props) => {
 
     
     return (
-        <div className="favourites">
+        <div className="favourites wrapper">
             {faves.map( fave => {
                 return (
-                    <div key={fave.key}>
-                        <h4>{fave.name}</h4>
-                        <img src={fave.imgUrl} alt=""></img>
+                    <Link to={`/common/${fave.name}`}>
+                    <div className="foodItem" key={fave.key}>
+                        <h2>{fave.name}</h2>
+                        <div className="imgContainer"> 
+                            <img src={fave.imgUrl} alt=""></img>
+                        </div>
                         
                     </div>
+                    </Link>
                 )
             })}
         </div>
