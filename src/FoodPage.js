@@ -36,33 +36,42 @@ const FoodPage = (props) => {
   
 
   return (
-    <div>
-      <h2>{info.name}</h2>
-      <FontAwesomeIcon icon={faHeart} 
-                       onClick={ !fave ?
-                                 addToFavourites
-                                 : () => removeFromFavourites(props.title)}
-                       className={ fave ?
-                                   "faved"
-                                   : ""}
-      />
-      <FontAwesomeIcon icon={faExchangeAlt} />
-      <img src={info.imgUrl} alt={info.name}/>
-      <div>
-        {/* Nutrition data goes here */}
-        <h3>Nutritional Information</h3>
-        <div>
-          {/* Macros */}
-          <h4>Macronutrients</h4>
-          {info.macroNutrients.map(nutr => {
-            return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
-          })}
+    <div className="foodPage">
+      <div className="foodPageContainer wrapper">
+        <div className="foodPageTitle foodPageChild">
+          <h2>{info.name}</h2>
+          <FontAwesomeIcon icon={faHeart} 
+                          onClick={ !fave ?
+                                    addToFavourites
+                                    : () => removeFromFavourites(props.title)}
+                          className={ fave ?
+                                      "faved"
+                                      : ""}
+          />
+          <FontAwesomeIcon icon={faExchangeAlt} />
+          <div className="foodPageImg">
+            <img src={info.imgUrl} alt={info.name}/>
+          </div>
         </div>
-        <div>
-          <h4>Micronutrients</h4>
-          {info.microNutrients.map(nutr => {
-            return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p> 
-          })}
+        
+        <div className="nutrContainer foodPageChild">
+          {/* Nutrition data goes here */}
+          <h3>Nutritional Information:</h3>
+          <div className="nutrInfoContainer">
+            <div className="nutrients nutrientsChild">
+              {/* Macros */}
+              <h4>Macronutrients</h4>
+              {info.macroNutrients.map(nutr => {
+                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+              })}
+            </div>
+            <div className="nutrients nutrientsChild">
+              <h4>Micronutrients</h4>
+              {info.microNutrients.map(nutr => {
+                return <p>{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p> 
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
