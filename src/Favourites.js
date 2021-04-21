@@ -1,31 +1,11 @@
 import { useEffect, useState } from "react";
 import firebase from "./firebase.js"
 
-const Favourites = () => {
-    const [faves, setFaves] = useState([]);
+const Favourites = (props) => {
+    const {faves} = props;
 
-    useEffect( () => {
-        const dbRef = firebase.database().ref();
+    console.log(faves);
 
-        dbRef.on("value", (response) => {
-            const newState = [];
-
-            // console.log(response.val());
-
-            const data = response.val();
-
-            for (let key in data) {
-                newState.push({
-                    key: key,
-                    name: data[key].title,
-                    imgUrl: data[key].imgUrl,
-                    fullNutrients: data[key].fullNutrients
-                })
-                console.log(newState);
-            }
-        setFaves(newState);
-        })
-    }, [])
     
     return (
         <div className="favourites">
@@ -34,7 +14,7 @@ const Favourites = () => {
                     <div key={fave.key}>
                         <h4>{fave.name}</h4>
                         <img src={fave.imgUrl} alt=""></img>
-                        <p>Nutritional Info</p>
+                        
                     </div>
                 )
             })}
