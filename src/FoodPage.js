@@ -35,6 +35,7 @@ const FoodPage = (props) => {
       const newKey = dbRef.push(dbInput).key;
       console.log(newKey);
     }
+    // checkName();
   }, [dbInput])
 
   // function to remove obj from favourites when clicked
@@ -51,11 +52,20 @@ const FoodPage = (props) => {
     dbRef.child(keyToRemove).remove();
   }
 
+  // const checkName = (foodItem.name) => {
+  //   if (faves.filter(fave => {
+  //     if (Object.values(fave).includes(foodItem.name)) {
+  //       console.log('is a fave');
+  //     }
+  //   })){}
+
+  // }
+
   return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
         <div className="foodPageTitle foodPageChild">
-          <h2>{info.name}</h2>
+          <h2>{foodItem.name}</h2>
           <FontAwesomeIcon icon={faHeart} 
                           onClick={ !fave ?
                                     addToFavourites
@@ -64,9 +74,9 @@ const FoodPage = (props) => {
                                       "faved"
                                       : ""}
           />
-          <FontAwesomeIcon icon={faExchangeAlt} />
+          {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
-            <img src={info.imgUrl} alt={info.name}/>
+            <img src={foodItem.imgUrl} alt={foodItem.name}/>
           </div>
           <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
           <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>

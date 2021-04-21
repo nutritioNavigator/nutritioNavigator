@@ -109,6 +109,7 @@ button:focus {
 
 main {
   background: rgba(255, 225, 249, 0.6);
+  min-height: 85vh;
 }
 
 h2 {
@@ -127,11 +128,14 @@ svg {
   color: #B20061;
 }
 
-.resultsContainer {
+.resultsContainer,
+.favourites,
+.foodPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .foodItem {
@@ -153,17 +157,19 @@ svg {
 	width: 100%;
 }
 
-.foodItem p {
+.foodItem p,
+.foodPageTitle p {
   margin: 10px 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Food page styles */
 
 .foodPage {
   background: rgba(255, 225, 249, 0.6);
-  height: 80vh;
-  display: flex;
-  align-items: center;
+  /* height: 80vh; */
+  /* display: flex; */
+  /* align-items: center; */
 }
 
 .foodPageContainer {
@@ -176,17 +182,23 @@ svg {
 }
 
 .foodPageTitle {
-  width: 60%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.foodPageTitle h2 {
+  margin-bottom: 4rem;
 }
 
 .nutrContainer {
   display: flex;
   flex-direction: column;
   line-height: 1.5rem;
+  width: 55%;
+
 }
 
 .nutrContainer h3 {
@@ -195,6 +207,11 @@ svg {
 
 .nutrInfoContainer {
   display: flex;
+}
+
+.nutrients {
+  width: 80%;
+  margin: 0.5rem;
 }
 
 h4 {
@@ -209,6 +226,15 @@ h4 {
 
 .favourites {
   display: flex;
+  justify-content: space-between;
+  
+}
+
+.favourites img {
+  display: inline-block;
+  width: 100%;
+  object-fit: contain;
+  
 }
 
 footer {
@@ -216,7 +242,13 @@ footer {
   background: rgba(178, 0, 97, 0.6);
   display: flex;
   justify-content: center;
-  height: 5vh;
+  /* height: 5vh; */
+
+}
+
+footer a {
+  margin: 0;
+  padding: 0;
 }
 
 footer p {
