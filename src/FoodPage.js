@@ -71,11 +71,32 @@ const FoodPage = (props) => {
     return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
+
+      <FontAwesomeIcon icon={faHeart} 
+                          onClick={ !fave ?
+                                    addToFavourites
+                                    : () => removeFromFavourites(props.title)}
+                          className={ fave ?
+                                      "faved"
+                                      : ""}
+          />   
         <div className="foodPageTitle foodPageChild">
           <h2>{foodItem.name}</h2>
+<<<<<<< Updated upstream
           <HeartIcon addToFaves={addToFavourites}
                      removeFromFaves={removeFromFavourites}
                      fave={fave}/>
+=======
+          {/* <FontAwesomeIcon icon={faHeart} 
+                          onClick={ !fave ?
+                                    addToFavourites
+                                    : () => removeFromFavourites(props.title)}
+                          className={ fave ?
+                                      "faved"
+                                      : ""}
+          /> */}
+          
+>>>>>>> Stashed changes
           {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
