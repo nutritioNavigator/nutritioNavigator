@@ -19,19 +19,21 @@ const Home = (props) => {
 
     return (
         <>
-            <form action="submit">
-                <label
-                htmlFor="searchbar"
-                className="visuallyHidden"
-                >Search food here</label>
-                <input
-                    id="searchbar"
-                    type="text"
-                    onChange={handleChange}
-                    placeholder="Type search here"
-                />
-                <button onClick={handleClick}>Search</button>
-            </form>
+            <div className="wrapper">
+                <form action="submit">
+                    <label
+                    htmlFor="searchbar"
+                    className="visuallyHidden"
+                    >Search food here</label>
+                    <input
+                        id="searchbar"
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Type search here"
+                    />
+                    <button onClick={handleClick}>Search</button>
+                </form>
+            </div>
 
             <div className="wrapper">
                 <div className="resultsContainer">

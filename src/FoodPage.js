@@ -64,9 +64,7 @@ const FoodPage = (props) => {
   return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
-        <div className="foodPageTitle foodPageChild">
-          <h2>{foodItem.name}</h2>
-          <FontAwesomeIcon icon={faHeart} 
+      <FontAwesomeIcon icon={faHeart} 
                           onClick={ !fave ?
                                     addToFavourites
                                     : () => removeFromFavourites(props.title)}
@@ -74,13 +72,17 @@ const FoodPage = (props) => {
                                       "faved"
                                       : ""}
           />
+        <div className="foodPageTitle foodPageChild">
+          <h2>{foodItem.name}</h2>
           {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
           </div>
-          <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
-          <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
-          <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
+          <div className="servingInfo">
+            <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
+            <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
+            <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
+          </div>
         </div>
         
         <div className="nutrContainer foodPageChild">
