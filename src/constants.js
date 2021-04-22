@@ -20,7 +20,12 @@ const vitsAndMins = {
     415: {name: "Vitamin B6", unit: "mg"},
 }
 
+const DB_KEY = {
+    'FAVOURITES' : 'favourites'
+}
+
 export {
+    DB_KEY,
     nutrInfo,
-    vitsAndMins
+    vitsAndMins,
 }

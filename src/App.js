@@ -3,16 +3,17 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 
 import { useEffect, useState } from 'react';
 import Favourites from "./Favourites.js"
 // import Compare from "./Compare.js"
-import FoodPage from './FoodPage.js';
+import FoodPage from "./FoodPage.js";
 import Home from "./Home.js";
 import callAPI from "./callAPI.js";
-import callFirebase from './callFirebase';
+import { callFirebase } from "./firebase.js";
+import FavouritesFoodPage from './FavouritesFoodPage';
 
 
 function App() {
@@ -28,15 +29,17 @@ function App() {
     fetchAPI();
   },[search]);
 
+  console.log(foodInfo);
+
   // Make a firebase call for up to date database
   useEffect( () => {
     const fetchFirebase = () => {
       setFaves(callFirebase());
     }
     fetchFirebase();
-  },[])
+  }, []);
 
-  console.log(faves);
+ 
 
   // function to get the query state from home.js for API call
   const getUserSearch = (query) => {
@@ -44,7 +47,7 @@ function App() {
     setSearch(query);
   }
 
-  console.log(foodInfo);
+
 
   return (
     <Router>
@@ -67,15 +70,20 @@ function App() {
                                 getUserSearch={getUserSearch} />}
           />
           <Route exact path="/common/:name" 
-                       render={ () => <FoodPage info={foodInfo} 
-                                                faves={faves} />}
+                       render={ () => <FoodPage foodInfo={foodInfo} 
+                                                faves={faves}
+                                                setFaves={setFaves} />}
           />
           <Route exact path="/favourites" 
                        render={ () => <Favourites faves={faves}/>}
           />
+          <Route exact path="/favourites/:name"
+                       render={ () => <FavouritesFoodPage faves={faves}
+                                                          setFaves={setFaves} />}
+          />
+
           {/* <Route exact path="/compare" component={ Compare } /> */}
         </main>
-
 
         <footer>
           <p>Created by <a href="https://github.com/midnightorca">Natalie</a>, <a href="https://github.com/randomock">Sam</a>, and <a href="https://github.com/yemisi-codes">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>

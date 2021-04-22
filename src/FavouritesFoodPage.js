@@ -7,20 +7,20 @@ import HeartIcon from "./HeartIcon.js";
 import callAPI from "./callAPI.js";
 
 
-const FoodPage = (props) => {
-    const {foodInfo, faves, setFaves} = props;
+const FavouritesFoodPage = (props) => {
+
+    const {faves, setFaves} = props;
     const location = useLocation();
-    const history = useHistory();
     const [addFavouriteFirebase, removeFavouriteFirebase] = useFavourites(setFaves);
     
     const [fave, setFave] = useState(false);
     const [dbInput, setDbInput] = useState({});
 
-    const slug = location.pathname.slice(8);
+    const slug = location.pathname.slice(12);
 
     // search for pathname to look for obj wanted in props array
-    let foodItem = foodInfo.filter(one => one.name === slug)[0];
-    console.log(foodInfo);
+    let foodItem = faves.filter(one => one.name === slug)[0];
+    console.log(faves);
     console.log("foodItem", foodItem);
     
     
@@ -60,64 +60,26 @@ const FoodPage = (props) => {
     }
     
     
-    if (foodItem === undefined) {
-      const newInfo = callAPI(slug);
-      foodItem = newInfo.filter(one => one.name === slug)[0]; 
-      // // // redirect home
-      // // history.push("/");
-      // return null
-    }
+    // if (foodItem === undefined) {
+    //   const newInfo = callAPI(slug);
+    //   foodItem = newInfo.filter(one => one.name === slug)[0]; 
+    //   // // // redirect home
+    //   // // history.push("/");
+    //   // return null
+    // }
     
     return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
-<<<<<<< HEAD
-      <FontAwesomeIcon icon={faHeart} 
-                          onClick={ !fave ?
-                                    addToFavourites
-                                    : () => removeFromFavourites(props.title)}
-                          className={ fave ?
-                                      "faved"
-                                      : ""}
-          />
-        <div className="foodPageTitle foodPageChild">
-          <h2>{foodItem.name}</h2>
-=======
         <div className="foodPageTitle foodPageChild">
           <h2>{foodItem.name}</h2>
           <HeartIcon addToFaves={addToFavourites}
                      removeFromFaves={removeFromFavourites}
                      fave={fave}/>
->>>>>>> d68f9f4f10519ef4c61a1216a8ff7bd7541f485d
           {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
           </div>
-<<<<<<< HEAD
-          <div className="servingInfo">
-            <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
-            <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
-            <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
-          </div>
-        </div>
-        
-        <div className="nutrContainer foodPageChild">
-          {/* Nutrition data goes here */}
-          <h3>Nutritional Information:</h3>
-          <div className="nutrInfoContainer">
-            <div className="nutrients nutrientsChild">
-              {/* Macros */}
-              <h4>Macronutrients</h4>
-              {foodItem.macroNutrients.map(nutr => {
-                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
-              })}
-            </div>
-            <div className="nutrients nutrientsChild">
-              <h4>Micronutrients</h4>
-              {foodItem.microNutrients.map(nutr => {
-                return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
-              })}
-=======
           <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
           <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
           <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
@@ -139,7 +101,6 @@ const FoodPage = (props) => {
                   return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
                 })}
               </div>
->>>>>>> d68f9f4f10519ef4c61a1216a8ff7bd7541f485d
             </div>
           </div>
 
@@ -147,6 +108,7 @@ const FoodPage = (props) => {
       </div>
     </div>
   )
+
 }
 
-export default FoodPage;
+export default FavouritesFoodPage;
