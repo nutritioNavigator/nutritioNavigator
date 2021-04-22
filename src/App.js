@@ -3,7 +3,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from "react-router-dom";
 
 import { useEffect, useState } from 'react';
@@ -35,6 +36,9 @@ function App() {
     }
     fetchFirebase();
   },[])
+
+  ///////////////////////////
+  
 
   console.log(faves);
 
@@ -73,9 +77,21 @@ function App() {
           <Route exact path="/favourites" 
                        render={ () => <Favourites faves={faves}/>}
           />
+
+          {/* <Switch>
+            foodInfo !== [] ?
+            <Route exact path="/common/:name" 
+                       render={ () => <FoodPage info={foodInfo} 
+                       faves={faves} />}
+                       />
+            : <Route exact path="/" 
+                       render={ () => <Home foodInfo={foodInfo} 
+                       getUserSearch={getUserSearch} />}
+                       />
+          </Switch> */}
+
           {/* <Route exact path="/compare" component={ Compare } /> */}
         </main>
-
 
         <footer>
           <p>Created by <a href="https://github.com/midnightorca">Natalie</a>, <a href="https://github.com/randomock">Sam</a>, and <a href="https://github.com/yemisi-codes">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>

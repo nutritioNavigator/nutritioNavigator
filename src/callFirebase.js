@@ -1,8 +1,9 @@
 import firebase from "./firebase.js";
+import { DB_KEY } from "./constants.js"
 
 const callFirebase = () => {
 
-    const dbRef = firebase.database().ref('favourites');
+    const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
 
     const newState = [];
 
@@ -25,7 +26,7 @@ const callFirebase = () => {
         // setDb(newState);
 
     })
-    console.log(newState);
+    // console.log(newState);
     return newState;
 }
 

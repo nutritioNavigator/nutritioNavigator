@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import firebase from "./firebase.js";
-import {nutrInfo, vitsAndMins} from "./constants.js";
+import { DB_KEY, nutrInfo, vitsAndMins } from "./constants.js";
 import { useLocation } from "react-router-dom";
+import HeartIcon from "./HeartIcon.js"
+
 
 const FoodPage = (props) => {
   const {info, faves} = props;
@@ -24,6 +26,7 @@ const FoodPage = (props) => {
     setDbInput(foodItem);
     setFave(true);
     console.log('added to faves');
+    
   }
 
   // useeffect to push to firebase when dbinput changes state
@@ -31,12 +34,23 @@ const FoodPage = (props) => {
     // if statement to only push obj if not empty
     if (Object.keys(dbInput).length !== 0) {
       // console.log("use effect db input =", dbInput);
-      const dbRef = firebase.database().ref('favourites');
+      const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
       const newKey = dbRef.push(dbInput).key;
       console.log(newKey);
     }
     // checkName();
   }, [dbInput])
+
+  // use effect to compare whether or not item is in firebase favourites
+  useEffect( () => {
+    if (faves.filter(fave => {
+      if (Object.values(fave).includes(foodItem.name)) {
+        setFave(true);
+      } 
+    })) {
+      
+    } 
+  }, [])
 
   // function to remove obj from favourites when clicked
   const removeFromFavourites = () => {
@@ -66,14 +80,9 @@ const FoodPage = (props) => {
       <div className="foodPageContainer wrapper">
         <div className="foodPageTitle foodPageChild">
           <h2>{foodItem.name}</h2>
-          <FontAwesomeIcon icon={faHeart} 
-                          onClick={ !fave ?
-                                    addToFavourites
-                                    : () => removeFromFavourites(props.title)}
-                          className={ fave ?
-                                      "faved"
-                                      : ""}
-          />
+          <HeartIcon addToFaves={addToFavourites}
+                     removeFromFaves={removeFromFavourites}
+                     fave={fave}/>
           {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
@@ -81,26 +90,27 @@ const FoodPage = (props) => {
           <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
           <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
           <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
-        </div>
-        
-        <div className="nutrContainer foodPageChild">
-          {/* Nutrition data goes here */}
-          <h3>Nutritional Information:</h3>
-          <div className="nutrInfoContainer">
-            <div className="nutrients nutrientsChild">
-              {/* Macros */}
-              <h4>Macronutrients</h4>
-              {foodItem.macroNutrients.map(nutr => {
-                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
-              })}
-            </div>
-            <div className="nutrients nutrientsChild">
-              <h4>Micronutrients</h4>
-              {foodItem.microNutrients.map(nutr => {
-                return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
-              })}
+
+          <div className="nutrContainer foodPageChild">
+            {/* Nutrition data here */}
+            <h3>Nutritional Information</h3>
+            <div className="nutrInfoContainer">
+              <div className="nutrients nutrientsChild">
+                {/* Macros */}
+                <h4>Macronutrients</h4>
+                {foodItem.macroNutrients.map(nutr => {
+                  return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+                })}
+              </div>
+              <div className="nutrients nutrientsChild">
+                <h4>Micronutrients</h4>
+                {foodItem.microNutrients.map(nutr => {
+                  return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
+                })}
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
