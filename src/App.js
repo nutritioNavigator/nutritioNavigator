@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
 } from "react-router-dom";
 
 import { useEffect, useState } from 'react';
@@ -14,6 +13,7 @@ import FoodPage from "./FoodPage.js";
 import Home from "./Home.js";
 import callAPI from "./callAPI.js";
 import { callFirebase } from "./firebase.js";
+import FavouritesFoodPage from './FavouritesFoodPage';
 
 
 function App() {
@@ -28,6 +28,8 @@ function App() {
     }
     fetchAPI();
   },[search]);
+
+  console.log(foodInfo);
 
   // Make a firebase call for up to date database
   useEffect( () => {
@@ -68,25 +70,17 @@ function App() {
                                 getUserSearch={getUserSearch} />}
           />
           <Route exact path="/common/:name" 
-                       render={ () => <FoodPage info={foodInfo} 
+                       render={ () => <FoodPage foodInfo={foodInfo} 
                                                 faves={faves}
                                                 setFaves={setFaves} />}
           />
           <Route exact path="/favourites" 
                        render={ () => <Favourites faves={faves}/>}
           />
-
-          {/* <Switch>
-            foodInfo !== [] ?
-            <Route exact path="/common/:name" 
-                       render={ () => <FoodPage info={foodInfo} 
-                       faves={faves} />}
-                       />
-            : <Route exact path="/" 
-                       render={ () => <Home foodInfo={foodInfo} 
-                       getUserSearch={getUserSearch} />}
-                       />
-          </Switch> */}
+          <Route exact path="/favourites/:name"
+                       render={ () => <FavouritesFoodPage faves={faves}
+                                                          setFaves={setFaves} />}
+          />
 
           {/* <Route exact path="/compare" component={ Compare } /> */}
         </main>

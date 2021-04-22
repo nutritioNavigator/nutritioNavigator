@@ -12,7 +12,7 @@ const Favourites = (props) => {
         <div className="favourites wrapper">
             {faves.map( fave => {
                 return (
-                    <Link to={`/common/${fave.name}`}>
+                    <Link to={`/favourites/${fave.name}`}>
                     <div className="foodItem" key={fave.key}>
                         <h2>{fave.name}</h2>
                         <div className="imgContainer"> 

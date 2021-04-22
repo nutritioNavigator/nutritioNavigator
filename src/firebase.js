@@ -35,29 +35,27 @@ const callFirebase = () => {
     return newState;
 };
 
+// custom hook to update local favourites state from firebase on add/remove
 const useFavourites = (setFaves) => {
+
     // add to favourites
     const add = (dbInput) => {
         const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
-        const newKey = dbRef.push(dbInput).key;
-        console.log(newKey);
+        dbRef.push(dbInput);
+        // update favourites state from firebase.
         setFaves(callFirebase());
     };
 
     // remove from favourites
     const remove = (fbItem) => {
         const keyToRemove = fbItem[0].key;
-        console.log(keyToRemove);
-    
         const dbRef = firebase.database().ref('favourites');
         dbRef.child(keyToRemove).remove();
+        // update favourites state from firebase
         setFaves(callFirebase());
     };
-
     return [add, remove];
 };
-
-
 
 export {
   firebase,
