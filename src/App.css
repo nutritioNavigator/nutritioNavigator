@@ -286,9 +286,10 @@ footer p {
 @media(max-width: 845px) {
   .foodPageContainer  {
     padding-right: 7rem;
-
+  }
+}
 /*------------*/
-    
+
 /* Media queries */
 @media (max-width: 1400px) {
   a {

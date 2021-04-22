@@ -80,31 +80,34 @@ const FavouritesFoodPage = (props) => {
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
           </div>
-          <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
-          <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
-          <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
-
-          <div className="nutrContainer foodPageChild">
-            {/* Nutrition data here */}
-            <h3>Nutritional Information</h3>
-            <div className="nutrInfoContainer">
-              <div className="nutrients nutrientsChild">
-                {/* Macros */}
-                <h4>Macronutrients</h4>
-                {foodItem.macroNutrients.map(nutr => {
-                  return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
-                })}
-              </div>
-              <div className="nutrients nutrientsChild">
-                <h4>Micronutrients</h4>
-                {foodItem.microNutrients.map(nutr => {
-                  return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
-                })}
-              </div>
-            </div>
+          <div className="servingInfo">
+            <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
+            <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
+            <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
           </div>
-
         </div>
+
+        <div className="nutrContainer foodPageChild">
+        {/* Nutrition data here */}
+        <h3>Nutritional Information:</h3>
+        <div className="nutrInfoContainer">
+            <div className="nutrients nutrientsChild">
+            {/* Macros */}
+            <h4>Macronutrients</h4>
+            {foodItem.macroNutrients.map(nutr => {
+                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+            })}
+            </div>
+            <div className="nutrients nutrientsChild">
+            <h4>Micronutrients</h4>
+            {foodItem.microNutrients.map(nutr => {
+                return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
+            })}
+            </div>
+        </div>
+        </div>
+
+        
       </div>
     </div>
   )

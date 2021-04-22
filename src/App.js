@@ -72,7 +72,8 @@ function App() {
           <Route exact path="/common/:name" 
                        render={ () => <FoodPage foodInfo={foodInfo} 
                                                 faves={faves}
-                                                setFaves={setFaves} />}
+                                                setFaves={setFaves} 
+                                                getUserSearch={getUserSearch}/>}
           />
           <Route exact path="/favourites" 
                        render={ () => <Favourites faves={faves}/>}
