@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import HeartIcon from "./HeartIcon";
 
 const FoodItem = (props) => {
     return (
@@ -9,6 +10,7 @@ const FoodItem = (props) => {
                     <div className="imgContainer">
                         <img src={props.imgUrl} alt="props.name" />
                     </div>
+                    {/* <HeartIcon /> */}
                 </div>
             </Link>
         </>

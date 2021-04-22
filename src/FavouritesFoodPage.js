@@ -7,20 +7,20 @@ import HeartIcon from "./HeartIcon.js";
 import callAPI from "./callAPI.js";
 
 
-const FoodPage = (props) => {
-    const {foodInfo, faves, setFaves} = props;
+const FavouritesFoodPage = (props) => {
+
+    const {faves, setFaves} = props;
     const location = useLocation();
-    const history = useHistory();
     const [addFavouriteFirebase, removeFavouriteFirebase] = useFavourites(setFaves);
     
     const [fave, setFave] = useState(false);
     const [dbInput, setDbInput] = useState({});
 
-    const slug = location.pathname.slice(8);
+    const slug = location.pathname.slice(12);
 
     // search for pathname to look for obj wanted in props array
-    let foodItem = foodInfo.filter(one => one.name === slug)[0];
-    console.log(foodInfo);
+    let foodItem = faves.filter(one => one.name === slug)[0];
+    console.log(faves);
     console.log("foodItem", foodItem);
     
     
@@ -60,13 +60,13 @@ const FoodPage = (props) => {
     }
     
     
-    if (foodItem === undefined) {
-      const newInfo = callAPI(slug);
-      foodItem = newInfo.filter(one => one.name === slug)[0]; 
-      // // // redirect home
-      // // history.push("/");
-      // return null
-    }
+    // if (foodItem === undefined) {
+    //   const newInfo = callAPI(slug);
+    //   foodItem = newInfo.filter(one => one.name === slug)[0]; 
+    //   // // // redirect home
+    //   // // history.push("/");
+    //   // return null
+    // }
     
     return (
     <div className="foodPage">
@@ -108,6 +108,7 @@ const FoodPage = (props) => {
       </div>
     </div>
   )
+
 }
 
-export default FoodPage;
+export default FavouritesFoodPage;
