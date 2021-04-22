@@ -71,29 +71,17 @@ const FoodPage = (props) => {
     return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
-<<<<<<< HEAD
-      <FontAwesomeIcon icon={faHeart} 
-                          onClick={ !fave ?
-                                    addToFavourites
-                                    : () => removeFromFavourites(props.title)}
-                          className={ fave ?
-                                      "faved"
-                                      : ""}
-          />
         <div className="foodPageTitle foodPageChild">
           <h2>{foodItem.name}</h2>
-=======
-        <div className="foodPageTitle foodPageChild">
-          <h2>{foodItem.name}</h2>
+
           <HeartIcon addToFaves={addToFavourites}
                      removeFromFaves={removeFromFavourites}
                      fave={fave}/>
->>>>>>> d68f9f4f10519ef4c61a1216a8ff7bd7541f485d
+
           {/* <FontAwesomeIcon icon={faExchangeAlt} /> */}
           <div className="foodPageImg">
             <img src={foodItem.imgUrl} alt={foodItem.name}/>
           </div>
-<<<<<<< HEAD
           <div className="servingInfo">
             <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
             <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
@@ -117,7 +105,6 @@ const FoodPage = (props) => {
               {foodItem.microNutrients.map(nutr => {
                 return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
               })}
-=======
           <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
           <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
           <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
@@ -139,7 +126,6 @@ const FoodPage = (props) => {
                   return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
                 })}
               </div>
->>>>>>> d68f9f4f10519ef4c61a1216a8ff7bd7541f485d
             </div>
           </div>
 

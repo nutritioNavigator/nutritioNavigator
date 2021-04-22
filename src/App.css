@@ -176,7 +176,8 @@ svg {
   align-items: center;
   border-radius: 1rem;
   background: #FFF;
-  padding: 3rem;
+  padding: 4rem;
+  position: relative;
 }
 
 .foodPageTitle {
@@ -193,6 +194,17 @@ svg {
 
 .foodPageTitle h2 {
   margin-bottom: 4rem;
+}
+
+.foodPageTitle p {
+  font-size: 0.7rem;
+}
+
+.foodPage svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2.5rem 3rem 0 0;
 }
 
 .nutrContainer {
@@ -213,7 +225,7 @@ svg {
 
 .nutrients {
   width: 80%;
-  margin: 0.5rem;
+  margin: 0.8rem;
 }
 
 h4 {
@@ -222,6 +234,7 @@ h4 {
 
 .nutrients p {
   font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
 }
 
 /* Favourites page styles */
@@ -258,6 +271,24 @@ footer p {
   padding: 0.5rem 0;
 }
 
+
+/* Food Page */
+@media(max-width: 970px) {
+  .nutrients p {
+    font-size: 0.7rem;
+  }
+
+  .foodPageTitle p {
+    font-size: 0.65rem;
+  }
+}
+
+@media(max-width: 845px) {
+  .foodPageContainer  {
+    padding-right: 7rem;
+
+/*------------*/
+    
 /* Media queries */
 @media (max-width: 1400px) {
   a {
