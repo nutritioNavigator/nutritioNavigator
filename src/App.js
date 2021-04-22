@@ -10,10 +10,10 @@ import {
 import { useEffect, useState } from 'react';
 import Favourites from "./Favourites.js"
 // import Compare from "./Compare.js"
-import FoodPage from './FoodPage.js';
+import FoodPage from "./FoodPage.js";
 import Home from "./Home.js";
 import callAPI from "./callAPI.js";
-import callFirebase from './callFirebase';
+import { callFirebase } from "./firebase.js";
 
 
 function App() {
@@ -35,12 +35,9 @@ function App() {
       setFaves(callFirebase());
     }
     fetchFirebase();
-  },[])
+  }, []);
 
-  ///////////////////////////
-  
-
-  console.log(faves);
+ 
 
   // function to get the query state from home.js for API call
   const getUserSearch = (query) => {
@@ -48,7 +45,7 @@ function App() {
     setSearch(query);
   }
 
-  console.log(foodInfo);
+
 
   return (
     <Router>
@@ -72,7 +69,8 @@ function App() {
           />
           <Route exact path="/common/:name" 
                        render={ () => <FoodPage info={foodInfo} 
-                                                faves={faves} />}
+                                                faves={faves}
+                                                setFaves={setFaves} />}
           />
           <Route exact path="/favourites" 
                        render={ () => <Favourites faves={faves}/>}

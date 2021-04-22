@@ -1,42 +1,38 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
-import firebase from "./firebase.js";
-import { DB_KEY, nutrInfo, vitsAndMins } from "./constants.js";
+import { useFavourites } from "./firebase.js";
 import { useLocation } from "react-router-dom";
-import HeartIcon from "./HeartIcon.js"
+
+import { nutrInfo, vitsAndMins } from "./constants.js";
+import HeartIcon from "./HeartIcon.js";
 
 
 const FoodPage = (props) => {
-  const {info, faves} = props;
-  const location = useLocation();
+    const {info, faves, setFaves} = props;
+    const location = useLocation();
+    const [addFavouriteFirebase, removeFavouriteFirebase] = useFavourites(setFaves);
 
-  const slug = location.pathname.slice(8);
+    const slug = location.pathname.slice(8);
 
-  // search for pathname to look for obj wanted in props array
-  const foodItem = info.filter(one => one.name === slug)[0];
-  console.log(info);
-  console.log(foodItem);
+    // search for pathname to look for obj wanted in props array
+    const foodItem = info.filter(one => one.name === slug)[0];
+    console.log(info);
+    console.log(foodItem);
 
-  const [fave, setFave] = useState(false);
-  const [dbInput, setDbInput] = useState({});
+    const [fave, setFave] = useState(false);
+    const [dbInput, setDbInput] = useState({});
 
-  // function to set state of dbinput to obj
-  const addToFavourites = (e) => {
-    setDbInput(foodItem);
-    setFave(true);
-    console.log('added to faves');
-    
-  }
+    // function to set state of dbinput to obj
+    const addToFavourites = (e) => {
+        setDbInput(foodItem);
+        setFave(true);
+        console.log('added to faves');
+    }
 
   // useeffect to push to firebase when dbinput changes state
   useEffect( () => {
     // if statement to only push obj if not empty
     if (Object.keys(dbInput).length !== 0) {
-      // console.log("use effect db input =", dbInput);
-      const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
-      const newKey = dbRef.push(dbInput).key;
-      console.log(newKey);
+      addFavouriteFirebase(dbInput);
     }
     // checkName();
   }, [dbInput])
@@ -58,12 +54,7 @@ const FoodPage = (props) => {
     console.log('removed');
 
     const fbItem = faves.filter(fave => fave.name == foodItem.name);
-    console.log(fbItem);
-    const keyToRemove = fbItem[0].key;
-    console.log(keyToRemove);
-
-    const dbRef = firebase.database().ref('favourites');
-    dbRef.child(keyToRemove).remove();
+    removeFavouriteFirebase(fbItem);
   }
 
   // const checkName = (foodItem.name) => {

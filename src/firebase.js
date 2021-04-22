@@ -14,17 +14,11 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
 const callFirebase = () => {
-
     const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
 
     const newState = [];
-
         dbRef.on("value", (response) => {
-
-            console.log(response.val());
-
             const data = response.val();
 
             for (let key in data) {
@@ -39,8 +33,34 @@ const callFirebase = () => {
             }
     })
     return newState;
-}
+};
 
-export default callFirebase;
+const useFavourites = (setFaves) => {
+    // add to favourites
+    const add = (dbInput) => {
+        const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);
+        const newKey = dbRef.push(dbInput).key;
+        console.log(newKey);
+        setFaves(callFirebase());
+    };
 
-export default firebase;
+    // remove from favourites
+    const remove = (fbItem) => {
+        const keyToRemove = fbItem[0].key;
+        console.log(keyToRemove);
+    
+        const dbRef = firebase.database().ref('favourites');
+        dbRef.child(keyToRemove).remove();
+        setFaves(callFirebase());
+    };
+
+    return [add, remove];
+};
+
+
+
+export {
+  firebase,
+  callFirebase,
+  useFavourites
+};
