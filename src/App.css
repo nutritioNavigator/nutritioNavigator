@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Maitree:wght@400;600&family=Montserrat:wght@400;500&display=swap');
 
-/*     font-family: 'Maitree', serif;
-
-    font-family: 'Montserrat', sans-serif; */
-
-/* 
-Red: #B20061
-Pink: #FFE1F9
-Blue: #350482 */
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration,input[type=search]::-webkit-search-results-button,input[type=search]::-webkit-search-results-decoration{-webkit-appearance:none;-moz-appearance:none}input[type=search]{-webkit-appearance:none;-moz-appearance:none;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}textarea{overflow:auto;vertical-align:top;resize:vertical}audio,canvas,video{display:inline-block;max-width:100%}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}a:focus{outline:thin dotted}a:active,a:hover{outline:0}img{border:0;-ms-interpolation-mode:bicubic}figure{margin:0}form{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline}button,input{line-height:normal}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}button,html,input,select,textarea{color:#222}::-moz-selection{background:#b3d4fc;text-shadow:none}::selection{background:#b3d4fc;text-shadow:none}img{vertical-align:middle}fieldset{border:0;margin:0;padding:0}textarea{resize:vertical}.chromeframe{margin:.2em 0;background:#ccc;color:#000;padding:.2em 0}
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -121,7 +113,7 @@ h2 {
 
 svg {
   cursor: pointer;
-  margin: 0 10px;
+  margin: 0 0.5rem;
   align-self: flex-start;
 }
 
@@ -160,8 +152,12 @@ svg {
 
 .foodItem p,
 .foodPageTitle p {
-  margin: 10px 0;
+  margin: 0.5rem 0;
   font-family: 'Montserrat', sans-serif;
+}
+
+.error {
+  text-align: center;
 }
 
 /* Food page styles */
@@ -178,7 +174,6 @@ svg {
   background: #FFF;
   padding: 4rem;
   position: relative;
- 
 }
 
 .foodPageTitle {
@@ -187,7 +182,6 @@ svg {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  
 }
 
 .foodPageImg {
@@ -199,7 +193,7 @@ svg {
 }
 
 .foodPageTitle p {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .foodPage svg {
@@ -213,7 +207,6 @@ svg {
   display: flex;
   flex-direction: column;
   line-height: 1.5rem;
-  /* width: 50%; */
 }
 
 .nutrContainer h3 {
@@ -225,7 +218,6 @@ svg {
 }
 
 .nutrients {
-  /* width: 80%; */
   margin: 0.8rem;
 }
 
@@ -244,14 +236,12 @@ h4 {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  
 }
 
 .favourites img {
   display: inline-block;
   width: 100%;
   object-fit: contain;
-  
 }
 
 /* Footer */
@@ -274,86 +264,11 @@ footer a:focus {
   color: rgba(53, 4, 130, 0.6);
 }
 
-
 footer p {
   margin: 0 0.5rem;
   padding: 0.5rem 0;
 }
 
-
-/* Food Page */
-@media(max-width: 970px) {
-  .nutrients p {
-    font-size: 0.7rem;
-  }
-
-}
-
-@media(max-width: 845px) {
-  .foodPageContainer  {
-    padding-right: 7rem;
-  }
-}
-
-@media(max-width: 805px) {
-  .nutrInfoContainer {
-    width: 90%;
-  }
-}
-
-@media(max-width: 720px) {
-  .foodPage svg {
-    margin: 2rem 1.3rem 0 0;
-  }
-
-}
-
-@media(max-width: 680px) {
-  .nutrients {
-    width: 100%;
-    margin: 0.5rem;
-  }
-}
-
-@media(max-width: 615px) {
-  .servingInfo {
-    width: 90%;
-  }
-}
-
-@media(max-width: 550px) {
-  .nutrContainer h3 {
-    margin-right: 20px;
-  }
-  
-  .foodPageContainer {
-    flex-direction: column;
-  }
-
-  .foodPageTitle {
-    width: 100%;
-  }
-
-  .servingInfo {
-    text-align: center;
-  }
-
-  .foodPageTitle h2 {
-    margin-bottom: 1rem;
-  }
-
-  .foodPageImg {
-    margin-bottom: 1rem;
-  }
-
-  .nutrContainer h3 {
-    text-align: center;
-    margin: 1.5rem 0 0.25rem 0;
-  }
-}
-
-/*------------*/
-    
 /* Media queries */
 @media (max-width: 1400px) {
   a {
@@ -381,6 +296,11 @@ footer p {
   }
 }
 
+@media(max-width: 970px) {
+  .nutrients p {
+    font-size: 0.7rem;
+  }
+}
 
 @media (max-width: 950px) {
   a {
@@ -390,6 +310,69 @@ footer p {
   footer {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media(max-width: 845px) {
+  .foodPageContainer  {
+    padding-right: 7rem;
+  }
+}
+
+@media(max-width: 805px) {
+  .nutrInfoContainer {
+    width: 90%;
+  }
+}
+
+@media (max-width: 720px) {
+  .foodPage svg {
+    margin: 2rem 1.3rem 0 0;
+  }
+
+}
+
+@media (max-width: 680px) {
+  .nutrients {
+    width: 100%;
+    margin: 0.5rem;
+  }
+}
+
+@media (max-width: 615px) {
+  .servingInfo {
+    width: 90%;
+  }
+}
+
+@media (max-width: 550px) {
+  .nutrContainer h3 {
+    margin-right: 20px;
+  }
+  
+  .foodPageContainer {
+    flex-direction: column;
+  }
+
+  .foodPageTitle {
+    width: 100%;
+  }
+
+  .servingInfo {
+    text-align: center;
+  }
+
+  .foodPageTitle h2 {
+    margin-bottom: 1rem;
+  }
+
+  .foodPageImg {
+    margin-bottom: 1rem;
+  }
+
+  .nutrContainer h3 {
+    text-align: center;
+    margin: 1.5rem 0 0.25rem 0;
   }
 }
 
@@ -446,8 +429,4 @@ footer p {
   .foodPage {
     padding: 1rem 0;
   }
-
-
-
 }
-
