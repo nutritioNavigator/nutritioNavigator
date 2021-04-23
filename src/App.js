@@ -5,14 +5,13 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-
 import { useEffect, useState } from 'react';
+
 import Favourites from "./Favourites.js"
 import FoodPage from "./FoodPage.js";
 import Home from "./Home.js";
 import nutritionix from "./nutritionixAPI.js";
 import { callFirebase } from "./firebase.js";
-
 
 function App() {
   const [foodInfo, setFoodInfo] = useState([]);
@@ -25,7 +24,7 @@ function App() {
       setFoodInfo( await nutritionix.search(search));
     }
     fetchAPI();
-  },[search]);
+  }, [search]);
 
   // Make a firebase call for up to date database
   useEffect( () => {
@@ -47,12 +46,16 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <header>
           <div className="wrapper">
             <div className="headerContainer">
-              <Link to="/" className="logo" onClick={clickHome} >NutritioNav</Link>
+              <Link to="/"
+                    className="logo"
+                    onClick={clickHome}>
+                NutritioNav
+              </Link>
               <nav>
                 <Link to="/favourites">Favourites</Link>
               </nav>
@@ -72,11 +75,12 @@ function App() {
                                                 />}
           />
           <Route exact path="/favourites"
-                       render={ () => <Favourites faves={faves}/>}
+                       render={ () => <Favourites faves={faves}/> }
           />
         </main>
 
         <footer>
+          {/* mr line too long */}
           <p>Created by <a href="https://github.com/midnightorca">Natalie</a>, <a href="https://github.com/randomock">Sam</a>, and <a href="https://github.com/yemisi-codes">Yemisi</a> at <a href="https://junocollege.com/">Juno College</a></p>
           <p>Powered by <a href="http://www.nutritionix.com/api">Nutritionix API</a></p>
         </footer>

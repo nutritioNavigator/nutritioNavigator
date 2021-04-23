@@ -2,7 +2,7 @@ import { useState } from "react";
 import FoodItem from "./FoodItem.js";
 
 const Home = (props) => {
-    const {foodInfo, getUserSearch} = props
+    const {foodInfo, getUserSearch} = props;
     const [userInput, setUserInput] = useState("");
 
     // Sets user input state as user types in search bar
@@ -22,8 +22,8 @@ const Home = (props) => {
             <div className="wrapper">
                 <form onSubmit={ (e) => handleSubmit(e, userInput)}>
                     <label
-                    htmlFor="searchbar"
-                    className="visuallyHidden"
+                        htmlFor="searchbar"
+                        className="visuallyHidden"
                     >Search food here</label>
                     <input
                         id="searchbar"
@@ -44,13 +44,13 @@ const Home = (props) => {
             <div className="wrapper">
                 <div className="resultsContainer">
                     {
-                    // map through each obj in api result array to display to page
-                    foodInfo.map( (oneFood, i) => {
-                        return ( <FoodItem name={oneFood.name}
-                                           imgUrl={oneFood.imgUrl} 
-                                           key={i}/>
-                        )
-                    })
+                        // map through each obj in api result array to display to page
+                        foodInfo.map( (oneFood, i) => {
+                            return ( <FoodItem name={oneFood.name}
+                                            imgUrl={oneFood.imgUrl} 
+                                            key={i}/>
+                            )
+                        })
                     }
                 </div>
             </div>
