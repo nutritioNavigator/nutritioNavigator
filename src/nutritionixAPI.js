@@ -23,9 +23,7 @@ const search = async (search) => {
     });
 
     const data = response.data.common;
-
     const newState= [];
-
     for (let i = 0; i < data.length; i++) {
         const fullNutrients = data[i].full_nutrients;
 
@@ -39,7 +37,7 @@ const search = async (search) => {
             },
             macroNutrients: fullNutrients.filter(nutrient => wantedNutrientIds.includes(nutrient.attr_id)),
             microNutrients: fullNutrients.filter(nutrient => wantedVMIds.includes(nutrient.attr_id))
-        })
+        });
     }
     return newState;
 }

@@ -8,7 +8,6 @@ import nutritionix from "./nutritionixAPI.js";
 
 import { callFirebase } from "./firebase.js"
 
-
 const FoodPage = (props) => {
     // PROPS ===================================================================
     const { faves, setFaves } = props;
@@ -53,7 +52,6 @@ const FoodPage = (props) => {
 
     // CLICK HANDLERS ==========================================================
     const addToFavourites = (e) => {
-      // setDbInput(foodItem);
       addFavouriteFirebase(foodItem);
       setFave(true);
     }
@@ -65,9 +63,8 @@ const FoodPage = (props) => {
       removeFavouriteFirebase(fbItem);
     }
 
-    // END CLICK HANDLERS ======================================================
-
     // JSX =====================================================================
+
     return (
     <div className="foodPage">
       { Object.keys(foodItem).length > 0 &&
