@@ -1,7 +1,7 @@
 import axios from "axios";
 import { nutrInfo, vitsAndMins } from "./constants.js";
 
-const callAPI = async (search) => {
+const search = async (search) => {
     // create array of keys of the wanted nutrients, and parse int
     const wantedNutrientIds = Object.keys(nutrInfo).map(n => +n);
     const wantedVMIds = Object.keys(vitsAndMins).map(n => +n);
@@ -44,4 +44,13 @@ const callAPI = async (search) => {
     return newState;
 }
 
-export default callAPI;
+const get = async(keyword) => {
+    const results = await search(keyword);
+    return results.filter(one => one.name === keyword)[0];
+};
+
+const api = {
+    search,
+    get,
+};
+export default api;

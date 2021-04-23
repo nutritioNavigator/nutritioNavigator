@@ -11,10 +11,10 @@ html {
 }
 
 img { 
-	width: 100%;
+  width: 100%;
   margin: auto;
-	height: auto;
-	display: block;
+  height: auto;
+  display: block;
 }
 
 h1,
@@ -329,7 +329,6 @@ footer p {
   .foodPage svg {
     margin: 2rem 1.3rem 0 0;
   }
-
 }
 
 @media (max-width: 680px) {

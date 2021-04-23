@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
-
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const HeartIcon = (props) => {
     const {addToFaves, removeFromFaves, fave} = props;
