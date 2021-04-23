@@ -1,26 +1,14 @@
-import { useEffect, useState } from "react";
-import firebase from "./firebase.js"
-import { Link } from 'react-router-dom';
+import FoodItem from "./FoodItem.js"
 
 const Favourites = (props) => {
     const {faves} = props;
 
-    console.log(faves);
-
-    
     return (
         <div className="favourites wrapper">
             {faves.map( fave => {
                 return (
-                    <Link to={`/favourites/${fave.name}`}>
-                    <div className="foodItem" key={fave.key}>
-                        <h2>{fave.name}</h2>
-                        <div className="imgContainer"> 
-                            <img src={fave.imgUrl} alt=""></img>
-                        </div>
-                        
-                    </div>
-                    </Link>
+                    <FoodItem name={fave.name}
+                              imgUrl={fave.imgUrl} />
                 )
             })}
         </div>

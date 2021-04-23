@@ -8,12 +8,10 @@ import {
 
 import { useEffect, useState } from 'react';
 import Favourites from "./Favourites.js"
-// import Compare from "./Compare.js"
 import FoodPage from "./FoodPage.js";
 import Home from "./Home.js";
-import callAPI from "./callAPI.js";
+import nutritionix from "./nutritionixAPI.js";
 import { callFirebase } from "./firebase.js";
-import FavouritesFoodPage from './FavouritesFoodPage';
 
 
 function App() {
@@ -24,7 +22,7 @@ function App() {
   // Make an API call
   useEffect( () => {
     const fetchAPI = async () => {
-      setFoodInfo( await callAPI(search));
+      setFoodInfo( await nutritionix.search(search));
     }
     fetchAPI();
   },[search]);
@@ -39,7 +37,6 @@ function App() {
 
   // function to get the query state from home.js for API call
   const getUserSearch = (query) => {
-    console.log(query);
     setSearch(query);
   }
 
@@ -64,25 +61,19 @@ function App() {
         </header>
 
         <main>
-          <Route exact path="/" 
-                       render={ () => <Home foodInfo={foodInfo} 
-                                getUserSearch={getUserSearch} 
-                                />}
+          <Route exact path="/"
+                       render={ () => <Home foodInfo={foodInfo}
+                                            getUserSearch={getUserSearch} />}
           />
-          <Route exact path="/common/:name" 
-                       render={ () => <FoodPage foodInfo={foodInfo} 
+          <Route exact path="/common/:name"
+                       render={ () => <FoodPage foodInfo={foodInfo}
                                                 faves={faves}
-                                                setFaves={setFaves} />}
+                                                setFaves={setFaves}
+                                                />}
           />
-          <Route exact path="/favourites" 
+          <Route exact path="/favourites"
                        render={ () => <Favourites faves={faves}/>}
           />
-          <Route exact path="/favourites/:name"
-                       render={ () => <FavouritesFoodPage faves={faves}
-                                                          setFaves={setFaves} />}
-          />
-
-          {/* <Route exact path="/compare" component={ Compare } /> */}
         </main>
 
         <footer>
