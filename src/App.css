@@ -178,6 +178,7 @@ svg {
   background: #FFF;
   padding: 4rem;
   position: relative;
+ 
 }
 
 .foodPageTitle {
@@ -186,6 +187,7 @@ svg {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .foodPageImg {
@@ -211,8 +213,7 @@ svg {
   display: flex;
   flex-direction: column;
   line-height: 1.5rem;
-  width: 55%;
-
+  /* width: 50%; */
 }
 
 .nutrContainer h3 {
@@ -224,7 +225,7 @@ svg {
 }
 
 .nutrients {
-  width: 80%;
+  /* width: 80%; */
   margin: 0.8rem;
 }
 
@@ -241,7 +242,8 @@ h4 {
 
 .favourites {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   
 }
 
@@ -264,7 +266,14 @@ footer {
 footer a {
   margin: 0;
   padding: 0;
+  color: #350482;
 }
+
+footer a:hover,
+footer a:focus {
+  color: rgba(53, 4, 130, 0.6);
+}
+
 
 footer p {
   margin: 0 0.5rem;
@@ -278,14 +287,70 @@ footer p {
     font-size: 0.7rem;
   }
 
-  .foodPageTitle p {
-    font-size: 0.65rem;
-  }
 }
 
 @media(max-width: 845px) {
   .foodPageContainer  {
     padding-right: 7rem;
+  }
+}
+
+@media(max-width: 805px) {
+  .nutrInfoContainer {
+    width: 90%;
+  }
+}
+
+@media(max-width: 720px) {
+  .foodPage svg {
+    margin: 2rem 1.3rem 0 0;
+  }
+
+}
+
+@media(max-width: 680px) {
+  .nutrients {
+    width: 100%;
+    margin: 0.5rem;
+  }
+}
+
+@media(max-width: 615px) {
+  .servingInfo {
+    width: 90%;
+  }
+}
+
+@media(max-width: 550px) {
+  .nutrContainer h3 {
+    margin-right: 20px;
+  }
+  
+  .foodPageContainer {
+    flex-direction: column;
+  }
+
+  .foodPageTitle {
+    width: 100%;
+  }
+
+  .servingInfo {
+    text-align: center;
+  }
+
+  .foodPageTitle h2 {
+    margin-bottom: 1rem;
+  }
+
+  .foodPageImg {
+    margin-bottom: 1rem;
+  }
+
+  .nutrContainer h3 {
+    text-align: center;
+    margin: 1.5rem 0 0.25rem 0;
+  }
+}
 
 /*------------*/
     
@@ -315,6 +380,7 @@ footer p {
     width: calc(33.33% - 1rem);
   }
 }
+
 
 @media (max-width: 950px) {
   a {
@@ -352,8 +418,36 @@ footer p {
   }
 }
 
+@media(max-width: 500px) {
+  .nutrInfoContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 @media (max-width: 480px) {
   button {
     width: 100%;
   }
+
+  header {
+    height: 40vh;
+  }
+
+  .headerContainer {
+    flex-direction: column;
+  }
+
+  .logo {
+    margin-bottom: 2rem;
+    font-size: 2.25rem;
+  }
+
+  .foodPage {
+    padding: 1rem 0;
+  }
+
+
+
 }
+
