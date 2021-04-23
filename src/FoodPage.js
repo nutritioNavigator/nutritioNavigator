@@ -139,7 +139,7 @@ const FoodPage = (props) => {
     return (
     <div className="foodPage">
       <div className="foodPageContainer wrapper">
-        <div className="foodPageTitle foodPageChild">
+        <div className="foodPageTitle">
           <h2>{foodItem.name}</h2>
 
           <HeartIcon addToFaves={addToFavourites}
@@ -152,12 +152,11 @@ const FoodPage = (props) => {
           </div>
           <div className="servingInfo">
             <p>Serving quantity: {foodItem.servingInfo.servingQty}</p>
-            <p>Serving weight: {foodItem.servingInfo.servingWeight} g</p>
+            <p>Serving weight: {foodItem.servingInfo.servingWeight}</p>
             <p>Serving unit: {foodItem.servingInfo.servingUnit}</p>
           </div>
         </div>
-        
-        <div className="nutrContainer foodPageChild">
+        <div className="nutrContainer">
           {/* Nutrition data goes here */}
           <h3>Nutritional Information:</h3>
           <div className="nutrInfoContainer">
@@ -165,15 +164,14 @@ const FoodPage = (props) => {
               {/* Macros */}
               <h4>Macronutrients</h4>
               {foodItem.macroNutrients.map(nutr => {
-                return <p>{nutr.value} {nutrInfo[nutr.attr_id].unit} {nutrInfo[nutr.attr_id].name}</p>
+                return <p>{nutrInfo[nutr.attr_id].name} {nutr.value.toFixed(2)} {nutrInfo[nutr.attr_id].unit}</p>
               })}
             </div>
             <div className="nutrients nutrientsChild">
               <h4>Micronutrients</h4>
               {foodItem.microNutrients.map(nutr => {
-                return <p >{nutr.value} {vitsAndMins[nutr.attr_id].unit} {vitsAndMins[nutr.attr_id].name}</p>
+                return <p>{vitsAndMins[nutr.attr_id].name} {nutr.value.toFixed(2)} {vitsAndMins[nutr.attr_id].unit} </p>
               })}
-
         </div>
       </div>
     </div>

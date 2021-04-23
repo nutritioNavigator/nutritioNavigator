@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 
 import FoodItem from "./FoodItem.js";
 
@@ -8,19 +8,20 @@ const Home = (props) => {
 
     // Sets user input state as user types in search bar
     const handleChange = (e) => {
-        setUserInput(e.target.value)
+        setUserInput(e.target.value);
     }
 
     // Waits for user to finish typing, then set state to be used in API search
-    const handleClick = (e) => {
+    const handleSubmit = (e, inputValue) => {
         e.preventDefault();
-        getUserSearch(userInput);
+        getUserSearch(inputValue);
+        setUserInput('');
     }
-
+    
     return (
         <>
             <div className="wrapper">
-                <form action="submit">
+                <form onSubmit={ (e) => handleSubmit(e, userInput)}>
                     <label
                     htmlFor="searchbar"
                     className="visuallyHidden"
@@ -30,9 +31,15 @@ const Home = (props) => {
                         type="text"
                         onChange={handleChange}
                         placeholder="Type search here"
+                        value={userInput}
+                        required
                     />
-                    <button onClick={handleClick}>Search</button>
+                    <button type="submit">Search</button>
                 </form>
+                {
+                    (foodInfo === undefined || foodInfo.length <= 0) ?
+                    <h4 className="error">Sorry, your search could not be completed.  Please try again.</h4> : ""
+                }
             </div>
 
             <div className="wrapper">

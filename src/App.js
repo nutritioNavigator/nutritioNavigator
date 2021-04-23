@@ -29,8 +29,6 @@ function App() {
     fetchAPI();
   },[search]);
 
-  console.log(foodInfo);
-
   // Make a firebase call for up to date database
   useEffect( () => {
     const fetchFirebase = () => {
@@ -39,15 +37,17 @@ function App() {
     fetchFirebase();
   }, []);
 
- 
-
   // function to get the query state from home.js for API call
   const getUserSearch = (query) => {
     console.log(query);
     setSearch(query);
   }
 
-
+  const clickHome = () => {
+    if (foodInfo.length === 0) {
+      setSearch('banana');
+    }
+  }
 
   return (
     <Router>
@@ -55,10 +55,9 @@ function App() {
         <header>
           <div className="wrapper">
             <div className="headerContainer">
-              <Link to="/" className="logo">NutritioNav</Link>
+              <Link to="/" className="logo" onClick={clickHome} >NutritioNav</Link>
               <nav>
                 <Link to="/favourites">Favourites</Link>
-                {/* <Link to="/compare">Compare</Link> */}
               </nav>
             </div>
           </div>
@@ -67,7 +66,8 @@ function App() {
         <main>
           <Route exact path="/" 
                        render={ () => <Home foodInfo={foodInfo} 
-                                getUserSearch={getUserSearch} />}
+                                getUserSearch={getUserSearch} 
+                                />}
           />
           <Route exact path="/common/:name" 
                        render={ () => <FoodPage foodInfo={foodInfo} 
