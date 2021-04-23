@@ -37,7 +37,6 @@ const callFirebase = () => {
 
 // custom hook to update local favourites state from firebase on add/remove
 const useFavourites = (setFaves) => {
-
     // add to favourites
     const add = (dbInput) => {
         const dbRef = firebase.database().ref(DB_KEY.FAVOURITES);

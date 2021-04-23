@@ -8,6 +8,7 @@ import nutritionix from "./nutritionixAPI.js";
 
 import { callFirebase } from "./firebase.js"
 
+
 const FoodPage = (props) => {
     // PROPS ===================================================================
     const { faves, setFaves } = props;
@@ -18,7 +19,6 @@ const FoodPage = (props) => {
 
     // STATE ===================================================================
     const [fave, setFave] = useState(false);
-    const [dbInput, setDbInput] = useState({});
     const [foodItem, setFoodItem] = useState({});
 
     const slug = location.pathname.slice(8);
@@ -40,15 +40,7 @@ const FoodPage = (props) => {
         setFaves(callFirebase());
       }
       fetchFirebase();
-    }, []);
-
-    // push to firebase when dbinput changes state
-    useEffect( () => {
-      // if statement to only push obj if not empty
-      if (Object.keys(dbInput).length !== 0) {
-        addFavouriteFirebase(dbInput);
-      }
-    }, [dbInput]);
+    }, [setFaves]);
 
     // use effect to compare whether or not item is in firebase favourites
     useEffect( () => {
@@ -61,7 +53,8 @@ const FoodPage = (props) => {
 
     // CLICK HANDLERS ==========================================================
     const addToFavourites = (e) => {
-      setDbInput(foodItem);
+      // setDbInput(foodItem);
+      addFavouriteFirebase(foodItem);
       setFave(true);
     }
 
